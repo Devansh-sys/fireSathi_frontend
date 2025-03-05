@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MainLayout from "../MainLayout";
 import {
     Box,
     Typography,
@@ -87,87 +88,94 @@ const IssuedCertificates = () => {
     };
 
     return (
-        <Box className="p-6 min-h-screen bg-gray-100">
-            <Card>
-                <CardContent>
-                    {/* Header Section */}
-                    <Box className="flex justify-between items-center mb-4">
-                        <TextField
-                            placeholder="Search by name..."
-                            value={search}
-                            onChange={handleSearch}
-                            size="small"
-                            sx={{ width: "30%" }}
-                        />
-                        {/* Filter Dropdown */}
-                        <Button
-                            variant="outlined"
-                            onClick={(e) => setAnchorEl(e.currentTarget)}
-                            endIcon={<Box component="span" className="ml-2">▼</Box>}
-                        >
-                            Filter
-                        </Button>
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={() => setAnchorEl(null)}
-                        >
-                            <MenuItem onClick={() => handleFilter("All")}>All</MenuItem>
-                            <MenuItem onClick={() => handleFilter("Valid")}>Valid</MenuItem>
-                            <MenuItem onClick={() => handleFilter("Expired")}>Expired</MenuItem>
-                        </Menu>
-                        {/* Export CSV Button */}
-                        <Button variant="contained" color="primary" onClick={exportCSV}>
-                            Export CSV
-                        </Button>
-                    </Box>
+        <MainLayout>
+            <Box>
+                <Box className="p-6 min-h-screen bg-gray-100">
+                    <Card>
+                        <CardContent>
+                            {/* Header Section */}
+                            <Box className="flex justify-between items-center mb-4">
+                                <TextField
+                                    placeholder="Search by name..."
+                                    value={search}
+                                    onChange={handleSearch}
+                                    size="small"
+                                    sx={{ width: "30%" }}
+                                />
+                                {/* Filter Dropdown */}
+                                <Button
+                                    variant="outlined"
+                                    onClick={(e) => setAnchorEl(e.currentTarget)}
+                                    endIcon={<Box component="span" className="ml-2">▼</Box>}
+                                >
+                                    Filter
+                                </Button>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={Boolean(anchorEl)}
+                                    onClose={() => setAnchorEl(null)}
+                                >
+                                    <MenuItem onClick={() => handleFilter("All")}>All</MenuItem>
+                                    <MenuItem onClick={() => handleFilter("Valid")}>Valid</MenuItem>
+                                    <MenuItem onClick={() => handleFilter("Expired")}>Expired</MenuItem>
+                                </Menu>
+                                {/* Export CSV Button */}
+                                <Button variant="contained" color="primary" onClick={exportCSV}>
+                                    Export CSV
+                                </Button>
+                            </Box>
 
-                    {/* Table Section */}
-                    <TableContainer component={Paper} className="max-h-[70vh] overflow-y-auto">
-                        <Table stickyHeader aria-label="issued certificates table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Certificate ID</TableCell>
-                                    <TableCell>Applicant Name</TableCell>
-                                    <TableCell>Business Name</TableCell>
-                                    <TableCell>Business Address</TableCell>
-                                    <TableCell>Issued Date</TableCell>
-                                    <TableCell>Expiry Date</TableCell>
-                                    <TableCell>Expired</TableCell>
-                                    <TableCell>Status</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {filteredData.map((item, index) => (
-                                    <TableRow key={index} className={index % 2 ? "bg-gray-100" : ""}>
-                                        <TableCell>{item.id}</TableCell>
-                                        <TableCell>{item.name}</TableCell>
-                                        <TableCell>{item.business}</TableCell>
-                                        <TableCell>{item.address}</TableCell>
-                                        <TableCell>{item.issued}</TableCell>
-                                        <TableCell>{item.expiry}</TableCell>
-                                        <TableCell>
-                                            <Typography
-                                                color={item.expired === "Expired" ? "error" : "success"}
-                                                fontWeight="bold"
-                                            >
-                                                {item.expired}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography color="success" fontWeight="bold">
-                                                {item.status}
-                                            </Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </CardContent>
-            </Card>
-        </Box>
+                            {/* Table Section */}
+                            <TableContainer component={Paper} className="max-h-[70vh] overflow-y-auto">
+                                <Table stickyHeader aria-label="issued certificates table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Certificate ID</TableCell>
+                                            <TableCell>Applicant Name</TableCell>
+                                            <TableCell>Business Name</TableCell>
+                                            <TableCell>Business Address</TableCell>
+                                            <TableCell>Issued Date</TableCell>
+                                            <TableCell>Expiry Date</TableCell>
+                                            <TableCell>Expired</TableCell>
+                                            <TableCell>Status</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {filteredData.map((item, index) => (
+                                            <TableRow key={index} className={index % 2 ? "bg-gray-100" : ""}>
+                                                <TableCell>{item.id}</TableCell>
+                                                <TableCell>{item.name}</TableCell>
+                                                <TableCell>{item.business}</TableCell>
+                                                <TableCell>{item.address}</TableCell>
+                                                <TableCell>{item.issued}</TableCell>
+                                                <TableCell>{item.expiry}</TableCell>
+                                                <TableCell>
+                                                    <Typography
+                                                        color={item.expired === "Expired" ? "error" : "success"}
+                                                        fontWeight="bold"
+                                                    >
+                                                        {item.expired}
+                                                    </Typography>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Typography color="success" fontWeight="bold">
+                                                        {item.status}
+                                                    </Typography>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </CardContent>
+                    </Card>
+                </Box>
+            </Box>
+        </MainLayout>
     );
 };
 
 export default IssuedCertificates; // Export the page component
+
+
+

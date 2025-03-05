@@ -1,3 +1,4 @@
+import MainLayout from "../MainLayout";
 import React, { useState, useEffect } from "react";
 import {
     Box,
@@ -41,49 +42,57 @@ const FPA = () => {
     };
 
     return (
-        <Box className="min-h-screen bg-gray-100 p-5 overflow-auto h-screen">
-            {/* Header */}
-            <Typography variant="h4" align="center" className="mb-5">
-                Fire NOC Issuance Dashboard
-            </Typography>
-
-            {/* Pending and Approved Requests Grid */}
-            <Grid container spacing={4}>
-                {/* Pending Requests Column */}
-                <Grid item xs={12} md={6}>
-                    <Typography variant="h6" className="mb-3">
-                        Pending Requests
+        <MainLayout>
+            <Box>
+                <Box className="min-h-screen bg-gray-100 p-5 overflow-auto h-screen">
+                    {/* Header */}
+                    <Typography variant="h4" align="center" className="mb-5">
+                        Fire NOC Issuance Dashboard
                     </Typography>
-                    <Box className="overflow-y-auto max-h-[70vh] pr-2">
-                        {requests
-                            .filter((req) => req.status === "Pending")
-                            .map((req) => (
-                                <RequestCard key={req.id} request={req} />
-                            ))}
-                    </Box>
-                </Grid>
 
-                {/* Approved Requests Column */}
-                <Grid item xs={12} md={6}>
-                    <Typography variant="h6" className="mb-3">
-                        Approved Requests
-                    </Typography>
-                    <Box className="overflow-y-auto max-h-[70vh] pr-2">
-                        {requests
-                            .filter((req) => req.status === "Approved")
-                            .map((req) => (
-                                <RequestCard
-                                    key={req.id}
-                                    request={req}
-                                    disapproveRequest={disapproveRequest}
-                                />
-                            ))}
-                    </Box>
-                </Grid>
-            </Grid>
-        </Box>
+                    {/* Pending and Approved Requests Grid */}
+                    <Grid container spacing={4}>
+                        {/* Pending Requests Column */}
+                        <Grid item xs={12} md={6}>
+                            <Typography variant="h6" className="mb-3">
+                                Pending Requests
+                            </Typography>
+                            <Box className="overflow-y-auto max-h-[70vh] pr-2">
+                                {requests
+                                    .filter((req) => req.status === "Pending")
+                                    .map((req) => (
+                                        <RequestCard key={req.id} request={req} />
+                                    ))}
+                            </Box>
+                        </Grid>
+
+                        {/* Approved Requests Column */}
+                        <Grid item xs={12} md={6}>
+                            <Typography variant="h6" className="mb-3">
+                                Approved Requests
+                            </Typography>
+                            <Box className="overflow-y-auto max-h-[70vh] pr-2">
+                                {requests
+                                    .filter((req) => req.status === "Approved")
+                                    .map((req) => (
+                                        <RequestCard
+                                            key={req.id}
+                                            request={req}
+                                            disapproveRequest={disapproveRequest}
+                                        />
+                                    ))}
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Box>
+        </MainLayout>
+        
     );
 };
+
+
+
 
 // Request Card Component
 const RequestCard = ({ request, disapproveRequest }) => {
