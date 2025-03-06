@@ -33,15 +33,24 @@ const theme = createTheme({
     ].join(","),
   },
 })
+const role = localStorage.getItem("role"); // Get role from localStorage
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    {/* <AppNOC/> */}
-    {/* <AppInspector /> */}
-    {/* <AppCompliance /> */}
+let ComponentToRender;
+
+if (role === "noc") {
+  ComponentToRender = <AppNOC />;
+} else if (role === "inspector") {
+  ComponentToRender = <AppInspector />;
+} else if (role === "compliance") {
+  ComponentToRender = <AppCompliance />;
+} else {
+  ComponentToRender = (
     <ThemeProvider theme={theme}>
       <HomePage />
     </ThemeProvider>
-   
-  </StrictMode>,
-)
+  );
+}
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>{ComponentToRender}</StrictMode>
+);

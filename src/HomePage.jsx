@@ -36,9 +36,31 @@ function App() {
   const [openLogin, setOpenLogin] = useState(false)
   const [openSignUp, setOpenSignUp] = useState(false)
   const [isUserLogin, setIsUserLogin] = useState(true)
+  const [email,setEmail] = useState("");
   const [scrolled, setScrolled] = useState(false)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
+
+  const roles = {
+    "devansh@gmail.com": "noc",
+    "siddhant@gmail.com": "inspector",
+    "shabbir@gmail.com": "compliance",
+  };
+
+  const handleSignIn = () => {
+    if (isUserLogin) {
+      window.location.href = "your_dashboard_url"; // Replace with actual URL
+    } else {
+      const mail = email; // Ensure 'email' is correctly defined
+      if (roles[mail]) {
+        localStorage.setItem("role", roles[mail]);
+        window.location.reload();
+
+      } else {
+        console.error("No role found for this email");
+      }
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -479,6 +501,7 @@ function App() {
             <div className="flex items-center border border-gray-300 rounded-lg p-3">
               <Email className="text-gray-400 mr-3" />
               <TextField
+              onChange={(e)=>setEmail(e.target.value)}
                 variant="standard"
                 placeholder="Email Address"
                 fullWidth
@@ -513,6 +536,7 @@ function App() {
             </div>
 
             <Button
+            onClick={handleSignIn}
               variant="contained"
               fullWidth
               className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-3 rounded-lg"
