@@ -21,15 +21,11 @@ This application digitizes the Fire NOC process, ensuring efficiency and account
 1. Clone the repository:
 git clone https://github.com/Devansh-sys/fireSathi_frontend.git
 
-text
+
 2. Set up the frontend:
-cd frontend && npm install && npm start
+cd fireSathi_frontend && npm install && npm run dev
 
-text
-3. Set up the backend:
-cd backend && mvn spring-boot:run
 
-text
 4. Configure Gemini and Streamlit for analytics (refer to respective docs).
 
 ## Usage 📖
